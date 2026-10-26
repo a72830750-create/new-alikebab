@@ -887,3 +887,11 @@ section[id] h3::after {
 .track-timeline li.done{color:#111;font-weight:bold;}
 .track-timeline li::before{content:"○";position:absolute;left:0;}
 .track-timeline li.done::before{content:"●";color:#B94E35;}
+
+.track-timeline{list-style:none;padding:0;margin:20px 0;position:relative;}
+.track-timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:#ddd;}
+.track-timeline li{position:relative;padding:12px 0 12px 32px;color:#888;}
+.track-timeline li::before{content:"○";position:absolute;left:4px;top:10px;font-size:16px;}
+.track-timeline li.done{color:#111;font-weight:600;}
+.track-timeline li.done::before{content:"✓";color:#B94E35;font-weight:bold;}
+.track-timeline li.active{color:#B94E35;}
