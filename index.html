@@ -481,6 +481,6 @@ setInterval(checkOrdersOpen,30000);
 (function(){const now=new Date();const rome=new Date(now.toLocaleString("en-US",{timeZone:"Europe/Rome"}));const target=new Date(rome);target.setHours(23,0,0,0);if(target<=rome)target.setDate(target.getDate()+1);setTimeout(()=>location.reload(),target.getTime()-rome.getTime());})();
 </script> -->
 
-<div id="my-order-modal" class="modal"><div class="modal-content"><div class="cart-modal-header"><h3>Order Status</h3><button class="modal-close" id="my-order-close">&times;</button></div><div id="my-order-status"></div></div></div>
+<div id="my-order-modal" class="modal"><div class="modal-content"><div class="cart-modal-header"><h3>Order Status</h3><button class="modal-close" id="my-order-close">&times;</button></div><div id="my-order-status"><ul class="track-timeline"><li data-step="new">Received</li><li data-step="accepted">Accepted</li><li data-step="completed">Ready/Delivered</li></ul></div></div></div>
 </body>
 </html>
