@@ -295,6 +295,7 @@ async function submitOrder() {
     saveCart();
     updateCartUI();
     closeCheckoutModal();
+    const mob=document.getElementById("my-order-btn"); if(mob) mob.style.display="flex";
 }
 
 function getSavedAddresses() {
