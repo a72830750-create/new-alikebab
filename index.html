@@ -481,6 +481,7 @@ setInterval(checkOrdersOpen,30000);
 (function(){const now=new Date();const rome=new Date(now.toLocaleString("en-US",{timeZone:"Europe/Rome"}));const target=new Date(rome);target.setHours(23,0,0,0);if(target<=rome)target.setDate(target.getDate()+1);setTimeout(()=>location.reload(),target.getTime()-rome.getTime());})();
 </script> -->
 
-<div id="my-order-modal" class="modal"><div class="modal-content" style="max-width:420px;"><div class="cart-modal-header"><h3>Order Tracking</h3><button class="modal-close" id="my-order-close">&times;</button></div><div id="my-order-number" style="font-weight:bold;margin:8px 0;"></div><ul class="track-timeline"><li>Order received</li><li>Preparing your food</li><li>Ready / Out for delivery</li><li>Delivered</li></ul><div id="my-order-eta" style="margin-top:12px;font-size:13px;color:#555;"></div></div></div>
+<div id="my-order-modal" class="modal"><div class="modal-content" style="max-width:420px;"><div class="cart-modal-header"><h3>Order Tracking</h3><button class="modal-close" id="my-order-close">&times;</button></div><div id="my-order-number" style="font-weight:bold;margin:8px 0;"></div><ul class="track-timeline"><li>Order received</li><li>Preparing your food</li><li>Ready / Out for delivery</li><li>Delivered</li></ul><div id="my-order-eta" style="margin-top:12px;font-size:13px;color:#555;"></div>
+<a href="tel:+393295886149" class="btn btn-primary" style="display:inline-block;margin-top:12px;">Call restaurant</a></div></div>
 </body>
 </html>
