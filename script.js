@@ -532,4 +532,4 @@ else initFixedFallback();
 
 
 
-window.showMyOrder=function(){const num=localStorage.getItem("faridkebab_last_order");if(!num){alert("No order yet");return;}const modal=document.getElementById("my-order-modal");if(modal)modal.classList.add("show");fetch("https://backend-1-osni.onrender.com/api/orders/lookup/"+num).then(r=>r.json()).then(d=>{const steps=["new","accepted","completed"];const idx=steps.indexOf(d.status);document.querySelectorAll(".track-timeline li").forEach((li,i)=>{li.classList.toggle("done",i<=idx);});});};
+window.showMyOrder=function(){const num=localStorage.getItem("faridkebab_last_order");if(!num){alert("No order yet");return;}const modal=document.getElementById("my-order-modal");if(modal)modal.classList.add("show");fetch("https://backend-1-osni.onrender.com/api/orders/lookup/"+num).then(r=>r.json()).then(d=>{const steps=["new","accepted","preparing","ready","out_for_delivery","completed"];const idx=steps.indexOf(d.status);document.querySelectorAll(".track-timeline li").forEach((li,i)=>{li.classList.toggle("done",i<=idx);});});};
