@@ -895,3 +895,22 @@ section[id] h3::after {
 .track-timeline li.done{color:#111;font-weight:600;}
 .track-timeline li.done::before{content:"✓";color:#B94E35;font-weight:bold;}
 .track-timeline li.active{color:#B94E35;}
+
+/* ===== Order Tracking Modal (Lieferando-style polish) ===== */
+#my-order-modal .modal-content { max-width: 420px; }
+#my-order-modal .track-timeline { list-style: none; padding: 0; margin: 16px 0; }
+#my-order-modal .track-timeline li {
+    position: relative; padding: 10px 0 10px 32px;
+    color: var(--text-muted); font-size: 14px; font-weight: 600;
+    border-left: 2px solid var(--border); margin-left: 8px;
+}
+#my-order-modal .track-timeline li::before {
+    content: ''; position: absolute; left: -7px; top: 14px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #ffffff; border: 2px solid var(--border);
+}
+#my-order-modal .track-timeline li.done { color: var(--text-primary); border-left-color: var(--primary); }
+#my-order-modal .track-timeline li.done::before { background: var(--primary); border-color: var(--primary); }
+#my-order-modal .track-timeline li:last-child { border-left-color: transparent; }
+#my-order-eta { font-size: 13px; color: var(--text-muted); margin-top: 12px; padding: 8px 12px; background: var(--bg-alt); border-radius: var(--radius-sm); }
+#my-order-number { font-size: 15px; font-weight: 700; color: var(--text-primary); }
