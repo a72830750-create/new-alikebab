@@ -532,5 +532,24 @@ else initFixedFallback();
 
 
 
-window.showMyOrder=function(){const num=localStorage.getItem("faridkebab_last_order");if(!num){alert("No order yet");return;}const modal=document.getElementById("my-order-modal");if(modal)modal.classList.add("show");function tick(){fetch("https://backend-1-osni.onrender.com/api/orders/lookup/"+num).then(r=>r.json()).then(d=>{const steps=["new","accepted","preparing","ready","out_for_delivery","completed"];const idx=steps.indexOf(d.status);document.querySelectorAll(".track-timeline li").forEach((li,i)=>{li.classList.toggle("done",i<=idx);});const eta=document.getElementById("my-order-eta");if(eta){if(d.status==="rejected"){eta.textContent="Order cancelled";}else{eta.textContent=d.delivery_timing==="later"?("Delivery at "+d.delivery_time): (d.pickup_time?("Pickup at "+d.pickup_time):"");}}
-const sum=document.getElementById("my-order-summary");if(sum){sum.innerHTML=(d.items||[]).map(i=>i.qty+"x "+i.name+" €"+(i.qty*i.price).toFixed(2)).join("<br>")+"<br><b>Total €"+Number(d.total).toFixed(2)+"</b>";}if(d.status==="completed"||d.status==="rejected"){clearInterval(window._trackTimer);}});}tick();window._trackTimer=setInterval(tick,10000);};
+window.showMyOrder=function(){const num=localStorage.getItem("faridkebab_last_order");if(!num){alert("Nessun ordine ancora");return;}const modal=document.getElementById("my-order-modal");if(modal)modal.classList.add("show");
+const steps=["new","accepted","preparing","ready","out_for_delivery","completed"];
+const labels={new:"Ordine ricevuto",accepted:"Ordine accettato",preparing:"Preparazione in corso",ready:"Pronto per il ritiro",out_for_delivery:"In consegna",completed:"Consegnato / Ritirato",rejected:"Ordine annullato"};
+function tick(){const err=document.getElementById("my-order-error");if(err)err.style.display="none";
+fetch("https://backend-1-osni.onrender.com/api/orders/lookup/"+num).then(r=>{if(!r.ok)throw new Error("not found");return r.json();}).then(d=>{
+const idx=steps.indexOf(d.status);
+const tl=document.getElementById("track-timeline");
+if(tl)tl.querySelectorAll("li").forEach((li,i)=>{const step=li.dataset.step;const si=steps.indexOf(step);li.classList.toggle("done",d.status!=="rejected" && si<=idx && si!==-1);li.classList.toggle("active",step===d.status);});
+const numEl=document.getElementById("my-order-number");if(numEl)numEl.textContent="Ordine #"+(d.order_number||num);
+const st=document.getElementById("my-order-status-text");if(st)st.textContent=labels[d.status]||d.status;
+const eta=document.getElementById("my-order-eta");if(eta){if(d.status==="rejected"){eta.textContent="Ordine annullato";}else if(d.delivery_timing==="later"){eta.textContent="Consegna prevista: "+(d.delivery_time||"");}else if(d.pickup_time){eta.textContent="Ritiro: "+d.pickup_time;}else{eta.textContent="";}}
+const sum=document.getElementById("my-order-summary");if(sum){sum.innerHTML=(d.items||[]).map(i=>i.qty+"x "+i.name+" €"+(i.qty*i.price).toFixed(2)).join("<br>")+"<br><b>Totale €"+Number(d.total).toFixed(2)+"</b>";}
+if(d.status==="completed"||d.status==="rejected"){clearInterval(window._trackTimer);window._trackTimer=null;}
+}).catch(()=>{const e=document.getElementById("my-order-error");if(e){e.textContent="Impossibile aggiornare lo stato. Riprovo...";e.style.display="block";}});}
+tick();
+if(window._trackTimer)clearInterval(window._trackTimer);
+window._trackTimer=setInterval(tick,10000);
+};
+// stop polling on close
+const _moc=document.getElementById("my-order-close");if(_moc)_moc.addEventListener("click",()=>{if(window._trackTimer){clearInterval(window._trackTimer);window._trackTimer=null;}});
+

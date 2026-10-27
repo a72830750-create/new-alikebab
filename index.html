@@ -481,8 +481,21 @@ setInterval(checkOrdersOpen,30000);
 (function(){const now=new Date();const rome=new Date(now.toLocaleString("en-US",{timeZone:"Europe/Rome"}));const target=new Date(rome);target.setHours(23,0,0,0);if(target<=rome)target.setDate(target.getDate()+1);setTimeout(()=>location.reload(),target.getTime()-rome.getTime());})();
 </script> -->
 
-<div id="my-order-modal" class="modal"><div class="modal-content" style="max-width:420px;"><div class="cart-modal-header"><h3>Stato Ordine</h3><button class="modal-close" id="my-order-close">&times;</button></div><div id="my-order-number" style="font-weight:bold;margin:8px 0;"></div><ul class="track-timeline"><li>Ordine ricevuto</li><li>Preparazione in corso</li><li>Pronto / In consegna</li><li>Consegnato</li></ul><div id="my-order-eta" style="margin-top:12px;font-size:13px;color:#555;"></div>
-<details style="margin-top:12px;"><summary>Order summary</summary><div id="my-order-summary"></div></details>
-<a href="tel:+393295886149" class="btn btn-primary" style="display:inline-block;margin-top:12px;">Call restaurant</a></div></div>
+<div id="my-order-modal" class="modal"><div class="modal-content" style="max-width:460px;">
+<div class="cart-modal-header"><h3>Stato Ordine</h3><button class="modal-close" id="my-order-close">&times;</button></div>
+<div id="my-order-number" style="font-weight:700;margin:8px 0;font-size:15px;"></div>
+<div id="my-order-status-text" style="font-size:16px;font-weight:700;margin:4px 0 12px;color:var(--primary);"></div>
+<ul class="track-timeline" id="track-timeline">
+<li data-step="new">Ordine ricevuto</li>
+<li data-step="accepted">Ordine accettato</li>
+<li data-step="preparing">Preparazione in corso</li>
+<li data-step="ready">Pronto / In consegna</li>
+<li data-step="completed">Consegnato / Ritirato</li>
+</ul>
+<div id="my-order-eta" style="margin-top:12px;font-size:13px;color:#555;"></div>
+<div id="my-order-error" style="margin-top:8px;font-size:13px;color:#c00;display:none;"></div>
+<details style="margin-top:12px;"><summary>Riepilogo ordine</summary><div id="my-order-summary" style="margin-top:8px;font-size:13px;"></div></details>
+<a href="tel:+393295886149" class="btn btn-primary" style="display:inline-block;margin-top:12px;">Chiama il ristorante</a>
+</div></div>
 </body>
 </html>
